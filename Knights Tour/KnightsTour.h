@@ -22,6 +22,7 @@ public:
     KnightsTour(int, int);
     ~KnightsTour(); // will be defined later
     // functions will be added as we go
+    bool isValid(int, int, int);
 };
 
 KnightsTour::KnightsTour(int m, int n)
@@ -38,4 +39,31 @@ KnightsTour::KnightsTour(int m, int n)
     
     // will start in the first index (0,0)
     board[0][0] = 0;
+}
+
+bool KnightsTour::isValid(<#int#> x, <#int#> y, <#int#> moveNum)
+{
+    // grabs dimensions of board - may have mixed them up
+    std::vector<std::vector<int>>::size_type xSize = board.size();
+    std::vector<std::vector<int>>::size_type ySize = board[0].size();
+    
+    // check bounds
+    if(( (0 <= x && x < xSize) && (0 <= y && y < ySize) ) && (moveNum <= totalMoves))
+    {
+        // in bounds and is in count limit
+        // check if the sqaure has been visited
+        if(board[x][y] > 0)
+        {
+            // has been visited
+            return false;
+        }
+        else
+        {
+            // either the beginning or has not been visited
+            return true;
+        }
+    }
+    
+    // move not valid
+    return false;
 }
