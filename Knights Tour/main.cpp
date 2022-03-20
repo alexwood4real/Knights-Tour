@@ -23,5 +23,6 @@ int main(int argc, const char * argv[])
     // define board size
     KnightsTour * board1 = new KnightsTour(m, n);
     
-    // after this they will call a solve knights tour function 
+    // solve tour
+    board1->solveTour();
 }
