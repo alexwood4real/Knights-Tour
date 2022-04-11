@@ -1,3 +1,7 @@
+// Alexander Wood, Taman Truong
+// CSE 310 Honors Contract - Nakamura
+// main.cpp
+
 #include <iostream>
 #include <iostream>
 #include <string>
@@ -24,5 +28,5 @@ int main(int argc, const char * argv[])
     KnightsTour * board1 = new KnightsTour(m, n);
     
     // solve tour
-    board1->solveTour();
+    // board1->solveTour();
 }

@@ -1,7 +1,7 @@
-// Alexander Wood
-// Assignment 7
-// CSE 310 - Nakamura
-// T TH 10:30-11:45
+// Alexander Wood, Taman Truong
+// CSE 310 Honors Contract - Nakamura
+// LinkedList.h
+
 
 #include <iostream> //to use cout
 #include <iomanip> //to format output
