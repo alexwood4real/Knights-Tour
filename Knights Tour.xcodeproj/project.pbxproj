@@ -23,8 +23,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6210100D27F90E0800CA8E05 /* LinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
-		6210100E27F90E5900CA8E05 /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		621C883427D6EC810051D1A6 /* KnightsTour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KnightsTour.h; sourceTree = "<group>"; };
 		6290AB7727AB800D001CDBF2 /* Knights Tour */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Knights Tour"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6290AB7A27AB800D001CDBF2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -62,8 +60,6 @@
 			children = (
 				6290AB7A27AB800D001CDBF2 /* main.cpp */,
 				621C883427D6EC810051D1A6 /* KnightsTour.h */,
-				6210100D27F90E0800CA8E05 /* LinkedList.h */,
-				6210100E27F90E5900CA8E05 /* Queue.h */,
 			);
 			path = "Knights Tour";
 			sourceTree = "<group>";

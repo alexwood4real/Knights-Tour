@@ -1,6 +1,12 @@
 // Alexander Wood, Taman Truong
 // CSE 310 Honors Contract - Nakamura
 // main.cpp
+/**
+ This is the main class. Nothing much is happening here. We introduce ourselves upon the start of the main.
+ We then ask for user input to define the demensions of the mxn board, for which they
+ wish to solve, then calls a helper function in the KnightsTour.h file to
+ recursivley solve the problem.
+ */
 
 #include <iostream>
 #include <iostream>
@@ -28,5 +34,5 @@ int main(int argc, const char * argv[])
     KnightsTour * board1 = new KnightsTour(m, n);
     
     // solve tour
-    // board1->solveTour();
+    board1->solveTour();
 }

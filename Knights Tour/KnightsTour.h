@@ -1,24 +1,46 @@
 // Alexander Wood, Taman Truong
 // CSE 310 Honors Contract - Nakamura
 // KnightsTour.h
+/**
+ In this header file, we have defined our KnightsTour class which has the private variables m, n, totalMoves,
+ and board. This variables hold the length of the board, width of the board, the total number of
+ possible moves that can be made, and the 2D matrix that represents our board.
+ We also define two size 8 matrixes that represent all the ways a knight can move. We use these two
+ arrays several times in the code to check the validity of moves.
+ 
+ We then have the public functions: constructor, isSafe, printBoard, solveTourRecursive, solveTour.
+ I wll describe the logic behind each function.
+ 
+ Constructor: KnightsTour(int, int)
+ First, this method takes in two integers and defines an mxn board from them.
+ It then uses these two numbers to define the total number of moves that can be made.
+ We then declare the size of the rows (m). We then enter a for-loop that creates
+ a new array for every index of the array, thus making the size of the columns (n).
+ We then enter a nested for-loop (mn) to set the value of each posiiton to the smallest
+ integer value as possible. This is supposed to represent negative infinity. 
+ */
 
-
-// defined headers
-#include "LinkedList.h"
-#include "Queue.h"
-
+#include <iostream>
+#include <iostream>
+#include <string>
 
 class KnightsTour
 {
 private:
     int m, n, totalMoves;
-    LinkedList ** board;
+    int ** board;
 public:
     KnightsTour(int, int);
     bool isSafe(int, int);
-    void createGraph();
+    void printBoard();
+    bool solveTourRecursive(int, int, int);
+    void solveTour();
     
 };
+
+// define possible x and y moves
+int xMoves[] = {1, 2, -2, -1, -1, 1, -2, 2};
+int yMoves[] = {-2, -1, -1, 2, -2, 2, 1, 1};
 
 // constructor
 KnightsTour::KnightsTour(int l, int w)
@@ -28,14 +50,22 @@ KnightsTour::KnightsTour(int l, int w)
     this->n = w;
     this->totalMoves = l * w;
     
-    // define m-length board of linked lists
-    board = new LinkedList*[this->m];
-    
-    // creates n-width board of linked lists
-    for(int i = 0; i < m; i++)
+    // create mxn board
+    board = new int*[this->m];
+    for(int i = 0; i < this->m; i++)
     {
-        board[i] = new LinkedList[this->n];
+        board[i] = new int[this->n];
     }
+    
+    // set every spot to negative infinity
+    for(int i = 0; i < this->m; i++)
+    {
+        for(int j = 0; j < this->n; j++)
+        {
+            board[i][j] = INT_MIN;
+        }
+    }
+    
 }
 
 // checks whether a given piece is good or not
@@ -51,30 +81,77 @@ bool KnightsTour::isSafe(int x, int y)
     return false;
 }
 
-void KnightsTour::createGraph()
+// print board
+void KnightsTour::printBoard()
 {
-    // define possible x and y moves
-    int xMoves[] = {1, 1, -1, -1, 2, 2, -2, -2};
-    int yMoves[] = {2, -2, 2, -2, 1, -1, 1, -1};
-    
-    // fill out adjacency list (board)
     for(int i = 0; i < this->m; i++)
     {
         for(int j = 0; j < this->n; j++)
         {
-            for(int k = 0; k < 8; k++)
-            {
-                // declare the move to be tested
-                int newX = i + xMoves[k];
-                int newY = j + yMoves[k];
-                
-                // check if it is valid
-                if(isSafe(newX, newY))
-                {
-                    // in the board 
-                }
-            }
+            std::cout << board[i][j] << " ";
         }
+        std::cout << std::endl;
     }
 }
 
+// the recursive call made to solve the tour
+bool KnightsTour::solveTourRecursive(int moveCount, int x, int y)
+{
+    // will hold the moves being tested
+    int nextX, nextY;
+    
+    // base case
+    if(moveCount == this->totalMoves)
+    {
+        // solution found
+        return true;
+    }
+    
+    // else, solve recursivley by iterating through moves
+    for(int i = 0; i < 8; i++)
+    {
+        // set next moves
+        nextX = x + xMoves[i];
+        nextY = y + yMoves[i];
+        
+        // check if move is in bounds AND is negative infinity
+        if((isSafe(nextX, nextY) == true) && (board[nextX][nextY] == INT_MIN))
+        {
+            // move is valid, so make that edge
+            board[nextX][nextY] = moveCount;
+            moveCount++;
+            
+            // recursive step - solve next step
+            if(solveTourRecursive(moveCount, nextX, nextY))
+            {
+                return true;
+            }
+            
+            // else, if move is not valid for the future, back track
+            board[nextX][nextY] = INT_MIN;
+            moveCount--;
+        }
+    }
+    
+    // no solution
+    return 0;
+}
+
+// solve tour - called from main
+void KnightsTour::solveTour()
+{
+    // start at (0, 0)
+    board[0][0] = 0;
+    
+    // call recursive solution
+    if(solveTourRecursive(1, 0, 0) == true)
+    {
+        // if solution found, prints the board with move numbers
+        printBoard();
+    }
+    else
+    {
+        std::cout << "Something went wrong here..." << std::endl;
+    }
+    
+}
